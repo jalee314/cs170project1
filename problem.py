@@ -1,4 +1,4 @@
-import node.py
+from node import Node
 
 '''
 Problem Class:
@@ -20,14 +20,34 @@ class Problem:
         return state == self.goal_state
     
     def move(self, state, operator, n):
-        row, col = 0 
+        row, col = None 
 
         for r in range(n):
             for c in range(n):
                 if state[r][c] == 0:
                     row, col = r, c
-                    
+                    break
+            if row is not None:
+                break
+
         new_state = [row[:] for row in state]
         
+        if operator == "UP" and row > 0:
+            new_state[row][col] = new_state[row - 1][col]
+            new_state[row-1][col] = 0
 
-        return 
+        if operator == "DOWN" and row < n - 1:
+            new_state[row][col] = new_state[row + 1][col]
+            new_state[row + 1][col] = 0
+
+        if operator == "LEFT" and col > 0: 
+            new_state[row][col] = new_state[row][col - 1]
+            new_state[row][col - 1] = 0 
+
+        if operator == "RIGHT" and col < n - 1:
+            new_state[row][col] = new_state[row][col + 1]
+            new_state[row][col + 1] = 0
+        
+        return new_state
+    
+    def heuristic_check():

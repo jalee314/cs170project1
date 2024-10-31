@@ -14,9 +14,15 @@ class Node:
         self.state = state                      
         self.g = g
         self.h = h
+        self.f = g + h
         self.move = move
         self.parent = parent
         self.depth = depth
+
+    def change_cost(self, f, g, h):
+        self.g = g
+        self.h = h
+        self.f = g + h
 
 
 
