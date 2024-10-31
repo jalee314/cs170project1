@@ -1,4 +1,4 @@
-#headers
+import node.py
 
 '''
 Problem Class:
@@ -19,6 +19,15 @@ class Problem:
     def check_goal(self, state):
         return state == self.goal_state
     
-    def move(self, state, operator):
-        new_state = state[:]
-        star_index = state.index(0)
+    def move(self, state, operator, n):
+        row, col = 0 
+
+        for r in range(n):
+            for c in range(n):
+                if state[r][c] == 0:
+                    row, col = r, c
+                    
+        new_state = [row[:] for row in state]
+        
+
+        return 
