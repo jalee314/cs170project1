@@ -10,7 +10,7 @@ Default parameters are for starting node, every other node will get those values
 '''
 
 class Node:
-    def __init__(self, state, g, h, move=None, parent=None, depth=0):
+    def __init__(self, state, g=0, h=0, move=None, parent=None, depth=0):
         self.state = state                      
         self.g = g
         self.h = h

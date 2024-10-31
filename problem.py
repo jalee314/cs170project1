@@ -10,7 +10,7 @@ There are only 4 possible operators here
 
 class Problem:
     def __init__(self, initial_state):
-        self.initial_state = initial_state
+        self.initial_state = Node(initial_state)
         self.goal_state = [[1, 2, 3],
                            [4, 5, 6],
                            [7, 8, 0]] #star in this context represented by 0.
@@ -36,18 +36,27 @@ class Problem:
             new_state[row][col] = new_state[row - 1][col]
             new_state[row-1][col] = 0
 
-        if operator == "DOWN" and row < n - 1:
+        elif operator == "DOWN" and row < n - 1:
             new_state[row][col] = new_state[row + 1][col]
             new_state[row + 1][col] = 0
 
-        if operator == "LEFT" and col > 0: 
+        elif operator == "LEFT" and col > 0: 
             new_state[row][col] = new_state[row][col - 1]
             new_state[row][col - 1] = 0 
 
-        if operator == "RIGHT" and col < n - 1:
+        elif operator == "RIGHT" and col < n - 1:
             new_state[row][col] = new_state[row][col + 1]
             new_state[row][col + 1] = 0
-        
+        else:
+            return None
+
         return new_state
     
-    def heuristic_check():
+    def apply_operators(self, node):
+        n = len(node.state) 
+     
+    
+    def heuristic(self, state, goal_state, type):
+        #type will correlate to which heuristic we're using 0 -> uniform, 1 -> misplaced, 2 -> euclidean 
+        if type == 0: #uniform
+             
