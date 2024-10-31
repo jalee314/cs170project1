@@ -24,5 +24,7 @@ class Node:
         self.h = h
         self.f = g + h
 
+    def __lt__(self, other):
+        return self.f < other.f
 
 
