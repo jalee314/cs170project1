@@ -24,7 +24,7 @@ class Node:
         self.h = h
         self.f = g + h
 
-    def __lt__(self, other):
+    def __lt__(self, other):                #operator overloader for pqueue
         return self.f < other.f
 
 

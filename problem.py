@@ -1,5 +1,6 @@
 from node import Node
 import math
+import queue
 
 '''
 Problem Class:
@@ -23,7 +24,7 @@ class Problem:
         return state == self.goal_state
     
     def move(self, state, operator, n):
-        row, col = None #set row and column pointers to none 
+        row, col = None, None #set row and column pointers to none 
 
         for r in range(n): #traverse through the current puzzle and find where the star currently is 
             for c in range(n):
@@ -78,7 +79,7 @@ class Problem:
     
     def calculate_heuristic(self, node): 
         h = 0
-        if self.type == 1: #misplaced
+        if self.heuristic == 1: #misplaced
              n = len(node.state)
 
              for row in range(n):
@@ -86,7 +87,7 @@ class Problem:
                      if node.state[row][col] != self.goal_state[row][col] and node.state[row][col] != 0:
                          h += 1
 
-        if self.type == 2: #euclidean
+        if self.heuristic == 2: #euclidean
             n = len(node.state)
             goal_state_tile = {}
 
@@ -108,6 +109,35 @@ class Problem:
 
         node.change_cost(node.g, h)
 
-    def search(self):
-        frontier = queue.
+                                                #VERY IMPORTANT, because I deal with calculating my heuristic once a child node is created in a 
+                                                #separate function, don't need to do the check here. pqueue will follow the order of A* automatically
+    def search(self):                           #graph search algorithm 
+        frontier = queue.PriorityQueue()  
+        frontier.put(self.initial_state)        #initialize frontier with starting state/node
+        explored = set()                        #empty set initialized for explored nodes
+        nodes_searched = 0
+        max_nodes = 0
+
+        while not frontier.empty():                                     #return failure if the frontier is empty, otherwise keep looping
+            max_nodes = max(max_nodes, frontier.qsize())                #compare max_nodes every iteration and update accordingly
+            curr_node = frontier.get()                                  #get node with least cost from front of pqueue
+            nodes_searched += 1                                         
+
+            if self.check_goal(curr_node.state):
+                return curr_node, nodes_searched, max_nodes             #return goal node with appropriate values if goal state found 
+            
+            explored.add(tuple(map(tuple, curr_node.state)))            #in order to add my state into a set, i have to make it immutable first, so i map the list into tuples, and then make a tuple of tuples
+
+            for child in self.apply_operators(curr_node):               #iterate through all possible branches
+                child_node_state = tuple(map(tuple, child.state))
+                if child_node_state not in explored:
+                    frontier.put(child)                                 #if new state isn't a repeat, make it explorable 
+                
+        return None, nodes_searched, max_nodes
+        
+
+
+                
+            
+        
         
