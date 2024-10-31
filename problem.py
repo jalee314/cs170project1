@@ -53,7 +53,23 @@ class Problem:
         return new_state
     
     def apply_operators(self, node):
-        n = len(node.state) 
+        n = len(node.state)
+        node_branches = []
+
+        for choice in self.operators:
+            new_state = self.move(node.state, choice, n)
+            if new_state is not None:
+                child_node = Node(
+                    state = new_state,
+                    g = node.g + 1,
+                    h = 0,
+                    move = choice,
+                    parent = node,
+                    depth = node.depth + 1
+                )
+                node_branches.append(child_node)
+         
+        return node_branches
      
     
     def heuristic(self, state, goal_state, type):
