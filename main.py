@@ -3,7 +3,7 @@ from node import Node
 from preset import *
 
 def main():
-    print("Welcome to Jason Lee's (862249342) 8 puzzle solver.\nType \"1\" to use a default puzzle, or \"2\" to enter your own puzzle.\n(Type 3 for a choice of puzzles)")
+    print("\n\n\nWelcome to Jason Lee's (862249342) 8 puzzle solver.\nType \"1\" to use a default puzzle, or \"2\" to enter your own puzzle.\n(Type 3 for a choice of puzzles)")
     choice = int(input(""))
 
     if choice == 1: 
