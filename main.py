@@ -97,8 +97,6 @@ def main():
                 print(" ".join(str(tile) if tile != 0 else "0" for tile in row))   
             print("\nGOAL!!!!\n")
 
-    print(f"To solve this problem the search algorithm expanded a total of {nodes_searched} nodes.\nThe maximum number of nodes in the queue at one time was {max_nodes}.\nThe depth of the goal node was {goal_node.depth}\n")
-
     print(f"Correct sequence of Actions:\n")                                                            #essentially what we did before, but we print out the operator used
     for node in solution_path:
         for row in node.state:
@@ -107,5 +105,7 @@ def main():
         if node.state == goal_node.state:
             print("Finished\n")        
     
+    print(f"To solve this problem the search algorithm expanded a total of {nodes_searched} nodes.\nThe maximum number of nodes in the queue at one time was {max_nodes}.\nThe depth of the goal node was {goal_node.depth}\n")
+
 if __name__ == "__main__":
     main()
