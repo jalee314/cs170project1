@@ -19,7 +19,7 @@ class Node:
         self.parent = parent
         self.depth = depth
 
-    def change_cost(self, g, h):
+    def change_cost(self, g, h):            
         self.g = g
         self.h = h
         self.f = g + h

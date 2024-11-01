@@ -79,7 +79,7 @@ class Problem:
     
     def calculate_heuristic(self, node): 
         h = 0
-        if self.heuristic == 1:                                                     #misplaced
+        if self.heuristic == 2:                                                     #misplaced
              n = len(node.state)
 
              for row in range(n):                                                   #for every piece that's in the wrong spot increment the function by zero. 
@@ -87,7 +87,7 @@ class Problem:
                      if node.state[row][col] != self.goal_state[row][col] and node.state[row][col] != 0:
                          h += 1
 
-        if self.heuristic == 2:                                                     #euclidean
+        if self.heuristic == 3:                                                     #euclidean
             n = len(node.state)
             goal_state_tile = {}
 
@@ -111,7 +111,7 @@ class Problem:
 
                                                                                     #VERY IMPORTANT, because I deal with calculating my heuristic once a child node is created in a 
                                                                                     #separate function, don't need to do the check here. pqueue will follow the order of A* automatically
-    def search(self):                                                               #graph search algorithm 
+    def search(self):                                                               #graph search algorithm following template in pdf 
         frontier = queue.PriorityQueue()  
         frontier.put(self.initial_state)                                            #initialize frontier with starting state/node
         explored = set()                                                            #empty set initialized for explored nodes
