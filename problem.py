@@ -117,26 +117,25 @@ class Problem:
         explored = set()                                                            #empty set initialized for explored nodes
         nodes_searched = 0
         max_nodes = 0
-        sol_trace = []
+        sol_trace = [self.initial_state]                                            #include initial state so that list has entire solution
 
         while not frontier.empty():                                                 #return failure if the frontier is empty, otherwise keep looping
             max_nodes = max(max_nodes, frontier.qsize())                            #compare max_nodes every iteration and update accordingly
             curr_node = frontier.get()                                              #get node with least cost from front of pqueue
             nodes_searched += 1
-
-            sol_trace.append(curr_node)                                         
+                                       
 
             if self.check_goal(curr_node.state):
-                return curr_node, nodes_searched, max_nodes, sol_trace                         #return goal node with appropriate values if goal state found 
+                return curr_node, nodes_searched, max_nodes 
             
             explored.add(tuple(map(tuple, curr_node.state)))                        #in order to add my state into a set, i have to make it immutable first, so i map the list into tuples, and then make a tuple of tuples
 
             for child in self.apply_operators(curr_node):                           #iterate through all possible branches
                 child_node_state = tuple(map(tuple, child.state))
                 if child_node_state not in explored:
-                    frontier.put(child)                                             #if new state isn't a repeat, make it explorable 
-                
-        return None, nodes_searched, max_nodes, sol_trace
+                    frontier.put(child)                                             #if new state isn't a repeat, make it explorable  
+                                     
+        return None, nodes_searched, max_nodes
         
 
 
