@@ -1,2 +1,2 @@
-# cs173project1
+# cs170project1
 eight puzzle
